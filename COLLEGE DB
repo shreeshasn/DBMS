@@ -1,0 +1,73 @@
+CREATE TABLE Student (
+    Snum INT PRIMARY KEY,
+    Sname VARCHAR(20),
+    Major VARCHAR(10),
+    Lev VARCHAR(20),
+    Age INT
+);
+
+CREATE TABLE Faculty (
+    Fid INT PRIMARY KEY,
+    Fname VARCHAR(20),
+    Depid INT
+);
+
+CREATE TABLE Class (
+    Cname VARCHAR(20) PRIMARY KEY,
+    Meets_at VARCHAR(20),
+    Room VARCHAR(20),
+    Fid INT,
+    FOREIGN KEY (Fid) REFERENCES Faculty(Fid) ON DELETE SET NULL
+);
+
+CREATE TABLE Enrolled (
+    Snum INT,
+    Cname VARCHAR(20),
+    PRIMARY KEY (Snum, Cname),
+    FOREIGN KEY (Snum) REFERENCES Student(Snum) ON DELETE CASCADE,
+    FOREIGN KEY (Cname) REFERENCES Class(Cname) ON DELETE CASCADE
+);
+
+
+INSERT INTO Student (Snum, Sname, Major, Lev, Age) VALUES
+(1, 'Andy', 'CSE', 'JR', 20),
+(2, 'Helen', 'Arts', 'JR', 22),
+(3, 'Bob', 'Psychology', 'GR', 24),
+(4, 'Pham', 'History', 'SR', 23),
+(5, 'Zola', 'CSE', 'SR', 21),
+(6, 'Abhi', 'CSE', 'JR', 22),
+(7, 'Tara', 'Arts', 'JR', 20);
+
+INSERT INTO Faculty (Fid, Fname, Depid) VALUES
+(22, 'Kera', 88),
+(23, 'Niall', 77),
+(24, 'Ravi', 33),
+(27, 'Lou', 66),
+(31, 'Jane', 44),
+(34, 'Payne', 55),
+(36, 'Rakesh', 22);
+
+INSERT INTO Class (Cname, Meets_at, Room, Fid) VALUES
+('HIS38', '12:00', 'R123', 34),
+('CS293', '12:00', 'R124', 23),
+('CS262', '2:00', 'R125', 24),
+('PY331', '9:00', 'R126', 27),
+('AR32', '9:00', 'R127', 36),
+('AR36', '10:00', 'R128', 31),
+('PY332', '8:00', 'R128', 22),
+('HIS37', '5:00', 'R128', 34),
+('HIS34', '4:00', 'R128', 31),
+('CS289', '2:00', 'R128', 22);
+
+INSERT INTO Enrolled (Snum, Cname) VALUES
+(1, 'CS262'),
+(1, 'AR32'),
+(2, 'AR32'),
+(2, 'PY331'),
+(3, 'PY331'),
+(3, 'HIS34'),
+(4, 'HIS38'),
+(5, 'CS293'),
+(5, 'HIS38'),
+(6, 'CS262');
+
