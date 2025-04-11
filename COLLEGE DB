@@ -71,3 +71,24 @@ INSERT INTO Enrolled (Snum, Cname) VALUES
 (5, 'HIS38'),
 (6, 'CS262');
 
+
+
+Queries:
+
+1}
+mysql> select s.sname from student s, faculty f, class c, enrolled e
+    -> where c.fid=f.fid and c.cname=e.cname and e.snum=s.snum and s.level='JR' and f.fname='Rakesh';
+
+2}
+mysql> select max(age) as MAX_AGE from student where major='History'
+    -> UNION
+    -> select max(s.age) from student s, class c, faculty f, enrolled e
+    -> where e.cname=c.cname and e.snum=s.snum and c.fid=f.fid and f.fname='Ravi';
+
+3}
+mysql> select distinct s.sname from student s, class c, class d, enrolled e where
+    -> e.snum=s.snum and e.cname!=c.cname and c.meetsat=d.meetsat;
+
+4}
+mysql> select distinct f.fname from faculty f, class c
+    -> where c.fid=f.fid and c.room='R128';
