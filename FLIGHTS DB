@@ -1,0 +1,26 @@
+Queries:
+
+1}
+select Aname from AirCraft A, Employees E, Certified C where A.Aid = C.Aid and E.Eid = C.Eid and
+E.Salary > 80000;
+
+
+2}
+select E.Eid, Max(CrusingRange) from Employees E, Certified C, AirCraft A where E.Eid=C.Eid and
+A.Aid = C.Aid group by E.Eid having count(*) >=3;
+
+
+5}
+select Eid, Ename, Salary from Employees where salary < (select avg(salary) from Employees) and Eid
+not in ( select Eid from Certified);
+
+
+3}
+select A.Aname ,avg(Salary) from Employees E, Certified C , Aircraft A where C.Eid = E.Eid and A.Aid
+= C.Aid and A.CrusingRange>1000 group by A.Aname;
+
+
+4}
+mysql> select distinct e.ename from employees e, aircraft a, certified c where
+    -> c.aid=a.aid and c.eid=e.eid and a.crusingrange>=3000 and a.aname!='Boeing';
+
