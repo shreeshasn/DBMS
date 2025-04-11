@@ -1,0 +1,23 @@
+Queries:
+
+1}
+mysql> Select distinct p.pno from Project p, Department d, Employee e where e.dno=d.dno and d.dno = p.dno and (e.lname =
+    -> 'scott' or d.mgrssn in (select ssn from Employee where lname='scott'));
+
+2}
+mysql> Select e.ssn , e.fname,e.lname, 1.1*e.salary as raisedsal from employee e , project p, workson w where p.pname =
+    -> 'IOT' and p.pno = w.pno and e.ssn = w.ssn;
+
+3}
+mysql> Select sum(salary) as sumsal, avg(salary) as avgsal, min(salary) as minsal, max(salary) as maxsal from
+    -> Employee e, Department d where e.dno = d.dno and d.dname='Accounts';
+
+4}
+mysql> select e.fname , e.lname from Employee e, project p, workson w where
+    -> p.dno=5 and w.pno=p.pno and w.ssn=e.ssn;
+
+5}
+mysql> select d.dno,d.dname,e.fname,e.lname ,count(*) as noofemp from Employee e, Department d where e.dno=d.dno and
+    -> e.salary>600000 and d.dno in(select e1.dno from Employee e1 group by e1.dno having count(*)>5) group by
+    -> d.dno,d.dname,e.fname,e.lname;
+
